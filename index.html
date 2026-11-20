@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Diksha ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #ffd1dc, #ff8eae, #f7b6d2);
+      color: #a32959; text-align: center; overflow-x: hidden;
+    }
+    .screen {
+      min-height: 100vh; display: none; flex-direction: column;
+      justify-content: center; align-items: center; padding: 22px;
+    }
+    .screen.active { display: flex; }
+    h1 { font-size: clamp(28px, 8vw, 36px); }
+    p { font-size: 18px; line-height: 1.6; }
+    .card {
+      background: #ffffffdf; padding: 28px 22px; border-radius: 25px;
+      width: min(100%, 430px); box-shadow: 0 10px 35px #a3295933;
+    }
+    button {
+      border: 0; border-radius: 30px; padding: 13px 28px;
+      font-size: 17px; cursor: pointer; margin: 10px;
+    }
+    .yes { background: #e83e78; color: white; }
+    .no { background: white; color: #e83e78; }
+    input {
+      padding: 14px; border: 2px solid #e83e78; border-radius: 25px;
+      text-align: center; font-size: 18px; outline: none; width: 80%;
+    }
+    .small { font-size: 14px; }
+    .heart {
+      position: fixed; bottom: -30px; animation: float 5s linear forwards;
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes float {
+      to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+    .pop {
+      position: fixed; inset: 0; background: #0006; display: none;
+      align-items: center; justify-content: center; padding: 20px; z-index: 10;
+    }
+    .popbox {
+      background: #fff0f5; border-radius: 25px; padding: 30px;
+      max-width: 350px; width: 100%; animation: zoom .4s;
+    }
+    @keyframes zoom {
+      from { transform: scale(.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    #buttons {
+      position: relative; min-height: 90px; width: 100%;
+      display: flex; justify-content: center; align-items: center;
+    }
+    #noBtn { position: relative; }
+    #noBtn.run {
+      position: fixed; z-index: 5; margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="screen active" id="welcome">
+    <div class="card">
+      <div style="font-size:55px">🌹</div>
+      <h1>Diksha ❤️</h1>
+      <h2>Happy Anniversary</h2>
+      <p>18 November 2024</p>
+      <p>A beautiful journey of love begins here... 💗</p>
+      <button class="yes" onclick="show('password')">Open My Surprise 💌</button>
+    </div>
+  </section>
+
+  <section class="screen" id="password">
+    <div class="card">
+      <h1>🔐 Secret Surprise</h1>
+      <p>Enter the secret password bacha 🥺</p>
+      <input type="password" id="pass" placeholder="Enter Password" autocomplete="off">
+      <br><br>
+      <button class="yes" onclick="checkPass()">Unlock ❤️</button>
+      <p id="error" style="color:red" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="screen" id="wish">
+    <div class="card">
+      <div style="font-size:55px">💗🌹💗</div>
+      <h1>Happy Anniversary Diksha!</h1>
+      <p>
+        Happy Anniversary bacha! 🥺❤️
+        <br><br>
+        18 November 2024 se shuru hua ye khoobsurat safar
+        hamesha aise hi pyaar aur khushiyon se bhara rahe.
+        <br><br>
+        Har din tumhare chehre par smile rahe,
+        har pal pyaar bana rahe aur ye rishta hamesha
+        special rahe. 💋
+        <br><br>
+        Here's to our beautiful journey and many more
+        memories together! ♾️
+      </p>
+      <h2>Forever &amp; Always ❤️</h2>
+      <button class="yes" onclick="startQuiz()">Aage dekho bacha 🥺</button>
+    </div>
+  </section>
+
+  <section class="screen" id="quiz">
+    <div class="card">
+      <p id="number">Question 1 of 4</p>
+      <div style="font-size:45px">🥺❤️</div>
+      <h2 id="question">Do u love me?</h2>
+      <div id="buttons">
+        <button class="yes" onclick="answerYes()">YES ❤️</button>
+        <button class="no" id="noBtn" type="button">NO 🙈</button>
+      </div>
+      <p class="small">Sach sach answer dena bacha 😜</p>
+    </div>
+  </section>
+
+  <section class="screen" id="final">
+    <div class="card">
+      <div style="font-size:65px">💍💗🌹</div>
+      <h1>Happy Anniversary Diksha! ❤️</h1>
+      <p>
+        You are special, you are precious and you deserve all the happiness in the world.
+        <br><br>
+        May our love grow stronger with every passing day.
+        <br><br>
+        Lots of love, hugs and kisses! 💋
+      </p>
+      <h2>Forever Together ♾️</h2>
+      <div style="font-size:35px">❤️💋❤️</div>
+    </div>
+  </section>
+
+  <div class="pop" id="popup" role="dialog" aria-modal="true" aria-labelledby="popTitle">
+    <div class="popbox">
+      <div style="font-size:55px" id="popEmoji">💋</div>
+      <h2 id="popTitle">Awww bchaaa! 🥺</h2>
+      <p id="popText">Ummmmmmmmmh 💋💋</p>
+      <button class="yes" onclick="nextQuestion()">Awww ❤️</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
